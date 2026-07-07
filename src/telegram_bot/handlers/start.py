@@ -2,6 +2,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram import Router
 
+from src.telegram_bot.keyboards import led_keyboard
 from src.core.config import settings
 
 
@@ -11,7 +12,7 @@ router = Router()
 @router.message(CommandStart())
 async def cmd_start(message: Message) -> None:
     user = message.from_user
-    admin_text = (
+    text_to_admin = (
         '🚨 Новый вход в бота\n\n'
 
         f'👤 Имя: {user.full_name}\n'
@@ -22,12 +23,14 @@ async def cmd_start(message: Message) -> None:
         f'⭐ Премиум: {'Да' if getattr(user, 'is_premium', False) else 'Нет'}'
     )
 
-    await message.bot.send_message(
-        chat_id=settings.ADMIN,
-        text=admin_text
-    )
+    if message.from_user.id == settings.ADMIN:
+        await message.answer(
+            'Привет! 👋\nТы успешно подключился.',
+            reply_markup=led_keyboard()
+        )
+    else:
+        await message.bot.send_message(
+            chat_id=settings.ADMIN,
+            text=text_to_admin
+        )
 
-    await message.answer(
-        'Привет! 👋\n'
-        'Ты успешно подключился.'
-    )

@@ -1,11 +1,13 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 from datetime import datetime
 
 
-@dataclass
-class Device:
+class Device(BaseModel):
     id: int
     ip: str
-    user_agent: str
     name: str
     connected_at: datetime
+
+
+class LED(Device):
+    state: bool

@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    SERVER_URL: str
     TOKEN: str
     ADMIN: int
     DB_USER: str

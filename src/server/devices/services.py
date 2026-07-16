@@ -9,7 +9,8 @@ led = LED(
     ip='localhost',
     name='Built-in LED',
     connected_at=datetime.now(),
-    state=False
+    state=False,
+    update=False
 )
 
 

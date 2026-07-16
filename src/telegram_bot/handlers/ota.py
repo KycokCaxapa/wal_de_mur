@@ -15,10 +15,10 @@ router.message.filter(IsAdmin())
 router.callback_query.filter(IsAdmin())
 
 
-@router.callback_query(F.data == 'toggle_led')
+@router.callback_query(F.data == 'ota_update')
 async def led_on(callback: CallbackQuery) -> None:
     async with aiohttp.ClientSession() as session:
-        await session.post(f'{url}/devices/led/switch')
+        await session.post(f'{url}/ota/publish')
     
-    await callback.answer('☀️ Свет включён' if led.state else '🌑 Свет выключен')
-    await callback.message.edit_reply_markup(reply_markup=main_ikb())
+    
+    await callback.answer('🔄 Обновление...')

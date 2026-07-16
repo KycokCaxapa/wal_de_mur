@@ -3,7 +3,7 @@ from aiogram.types import Message
 from aiogram import Router
 
 from src.telegram_bot.handlers.admin_filter import IsAdmin
-from src.server.devices.manager import devices
+from src.server.devices.services import devices
 from src.server.devices.models import Device
 from src.core.config import settings
 

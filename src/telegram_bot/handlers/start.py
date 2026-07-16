@@ -2,7 +2,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram import Router
 
-from src.telegram_bot.keyboards import led_keyboard
+from src.telegram_bot.keyboards import main_ikb
 from src.core.config import settings
 
 
@@ -26,7 +26,7 @@ async def cmd_start(message: Message) -> None:
     if message.from_user.id == settings.ADMIN:
         await message.answer(
             'Привет! 👋\nТы успешно подключился.',
-            reply_markup=led_keyboard()
+            reply_markup=main_ikb()
         )
     else:
         await message.bot.send_message(

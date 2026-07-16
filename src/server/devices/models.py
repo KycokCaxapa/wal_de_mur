@@ -11,3 +11,4 @@ class Device(BaseModel):
 
 class LED(Device):
     state: bool
+    update: bool
